@@ -1,21 +1,61 @@
-# ISO8583Tutorial
+# ISO8583 Tutorial - Interactive Learning Platform
 
-This project was created using the [Ktor Project Generator](https://start.ktor.io).
+A complete Ktor web application designed to teach ISO8583 financial messaging through interactive tutorials and a live message simulator.
 
-Here are some useful links to get you started:
+## Overview
 
-- [Ktor Documentation](https://ktor.io/docs/home.html)
-- [Ktor GitHub page](https://github.com/ktorio/ktor)
-- The [Ktor Slack chat](https://app.slack.com/client/T09229ZC6/C0A974TJ9). You'll need
-  to [request an invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) to join.
+This application provides:
+- **Comprehensive Tutorials**: Learn about MTI, Bitmaps, and Data Fields
+- **Interactive Simulator**: Build and send real ISO8583 messages
+- **Mock Payment Host**: See how transactions are approved/declined
+- **Visual Breakdown**: Understand hex encoding and bitmap structures
+
+## Technical Stack
+
+- **Framework**: Ktor 3.4.0
+- **Language**: Kotlin 2.3.0
+- **ISO8583 Library**: JPOS 3.0.1
+- **Templating**: Ktor HTML DSL
+- **Build Tool**: Gradle with Kotlin DSL
+
+## Project Structure
+
+```
+src/main/kotlin/com/divora/
+├── Application.kt              # Main application entry point
+├── Routing.kt                  # Route configuration
+├── iso8583/
+│   ├── BitmapHelper.kt        # Bitmap generation and parsing
+│   ├── ISO8583Message.kt      # Message building and parsing
+│   └── MockHostService.kt     # Payment processor simulation
+├── routes/
+│   ├── TutorialRoutes.kt      # Tutorial page routes
+│   └── SimulatorRoutes.kt     # Simulator and processing routes
+└── views/
+    ├── CommonLayout.kt        # Shared HTML layout and CSS
+    ├── TutorialPages.kt       # Tutorial content pages
+    └── SimulatorPages.kt      # Interactive simulator pages
+```
 
 ## Features
 
-Here's a list of features included in this project:
+### Tutorial Pages
+1. **Introduction**: Overview of ISO8583 standard
+2. **MTI (Message Type Indicator)**: 4-digit message classification
+3. **Bitmap**: Visual hex-to-binary conversion examples
+4. **Data Fields**: Common field descriptions and formats
 
-| Name                                               | Description                                                 |
-|----------------------------------------------------|-------------------------------------------------------------|
-| [Routing](https://start.ktor.io/p/routing-default) | Allows to define structured routes and associated handlers. |
+### Interactive Simulator
+- Build 0200 (Authorization Request) messages
+- Input fields: Processing Code, Amount, STAN, Terminal ID, Merchant ID
+- Real-time hex message generation
+- Visual field breakdown
+
+### Mock Host Logic
+- Processes authorization requests
+- **Approval Rule**: Amounts ending in "00" (e.g., $10.00) → Approved (Code 39='00')
+- **Decline Rule**: All other amounts → Declined (Code 39='05')
+- Returns 0210 (Authorization Response) with echoed fields
 
 ## Building & Running
 
