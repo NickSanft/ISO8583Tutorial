@@ -11,28 +11,40 @@ fun Route.tutorialRoutes() {
             renderHomePage()
         }
     }
-    
+
     get("/tutorial/introduction") {
         call.respondHtml {
             renderIntroductionPage()
         }
     }
-    
+
     get("/tutorial/mti") {
         call.respondHtml {
             renderMTIPage()
         }
     }
-    
+
     get("/tutorial/bitmap") {
         call.respondHtml {
             renderBitmapPage()
         }
     }
-    
+
     get("/tutorial/fields") {
         call.respondHtml {
             renderFieldsPage()
+        }
+    }
+
+    get("/tutorial/variable-length") {
+        call.respondHtml {
+            renderVariableLengthPage()
+        }
+    }
+
+    get("/tutorial/flow") {
+        call.respondHtml {
+            renderMessageFlowPage()
         }
     }
 }
